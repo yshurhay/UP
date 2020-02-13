@@ -7,3 +7,15 @@ Changes to be committed:
         new file:   .idea/misc.xml
         new file:   .idea/modules.xml
         new file:   .idea/workspace.xml
+
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .gitignore
+        new file:   .idea/misc.xml
+        new file:   .idea/modules.xml
+        new file:   .idea/workspace.xml
+        new file:   task1/status.txt
