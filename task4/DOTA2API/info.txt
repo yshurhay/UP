@@ -1,0 +1,9 @@
+1. matches_request
+Params:match_id
+Result:match information
+2. playersByRank
+Params:none
+Result:ranks of players
+3. players
+Params:player_id
+Result:player info
