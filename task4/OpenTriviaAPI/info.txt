@@ -1,0 +1,9 @@
+1. sports
+Params:category, amount
+Result:questions, answers
+2. history
+Params:category, amount
+Result:questions, answers
+3. art
+Params:category, amount
+Result:questions, answers

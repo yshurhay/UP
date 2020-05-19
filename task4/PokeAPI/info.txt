@@ -1,0 +1,9 @@
+1. ditto
+Param: none 
+Result: Resource for ditto
+2. bulbasaur
+Param: none
+Result: Resource for bulbasaur
+3. flying
+Param: none
+Result: Resource for flying
