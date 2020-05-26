@@ -41,27 +41,44 @@
 
     let posts = [...generatePosts(20)];
 
-    function getPosts(skip=0, top=10, filterConfig=undefined) {
-        let postsToReturn = posts.concat();
+    function getPosts(skip= 0, top= 10, filterConfig= undefined) {
+        if (typeof skip !== 'number' || typeof top !== 'number') {
+            console.log('Input error');
+            return;
+        }
 
-        if (filterConfig) {
+        let resultPosts = posts;
+
+        if(filterConfig) {
             for(let attribute in filterConfig) {
-                if (attribute === "hashTags") {
-                    for(let i = 0; i < filterConfig.hashTags.length; i++) {
-                        postsToReturn = postsToReturn.filter(post => post.hashTags.includes(filterConfig.hashTags[i]))
-                    }
-                }
-                else {
-                    postsToReturn = postsToReturn.filter(post => post[attribute] === filterConfig[attribute]);
+                switch (attribute) {
+                    case "author":
+                        resultPosts = resultPosts.filter(post => post.author === filterConfig.author);
+                        break;
+                    case "dateBegin":
+                        resultPosts = resultPosts.filter(post => (filterConfig.dateBegin <= post.createdAt));
+                        break;
+                    case "dateEnd":
+                        resultPosts = resultPosts.filter(post => (post.createdAt <= filterConfig.dateEnd));
+                        break;
+                    case "hashTags":
+                        for (let tag in filterConfig.hashTags) {
+                            resultPosts = resultPosts.filter(post => post.hashTags.includes(tag));
+                        }
+                        break;
+                    default:
+                        console.log("Error!");
+
+                        return;
                 }
             }
         }
 
-        postsToReturn.sort(function (post1, post2) {
-            if (post1.createdAt < post2.createdAt) {
+        resultPosts.sort(function (post1, post2) {
+            if(post1.createdAt < post2.createdAt) {
                 return 1;
             }
-            else if (post2.createdAt < post1.createdAt) {
+            else if(post2.createdAt < post1.createdAt) {
                 return -1;
             }
             else {
@@ -69,11 +86,16 @@
             }
         });
 
-        return postsToReturn.slice(skip, skip + top);
+        return resultPosts.slice(skip, skip + top);
     }
 
     function getPost(id) {
-        return posts.find(post => post.id === id);
+        if(typeof id === 'string'){
+            return posts.find(post => post.id === id);
+        }
+        else {
+            console.log('Error');
+        }
     }
 
     function validatePostAttribute(post, attribute) {
@@ -106,6 +128,84 @@
                validatePostProperty(post, "likes");
     }
 
+    function validateEditPost(post) {
+        for (let attribute in post) {
+            switch(field) {
+                case "id":
+                    return false;
+                case "description":
+                    if(typeof post.description !== "string" && post.description.length > 200)
+                        return false;
+                case "createdAt":
+                    return false;            
+                case "author":
+                    return false;
+                case "likes":
+                    return false;
+                default:
+                    break;    
+            }
+        }
+
+        return validatePostProperty(post, "id") &&
+               validatePostProperty(post, "description") &&
+               validatePostProperty(post, "createdAt") &&
+               validatePostProperty(post, "author") &&
+               validatePostProperty(post, "hashTags") &&
+               validatePostProperty(post, "likes");
+    }
+
+    function checkEditPost(post) {
+        for (let field in post) {
+            switch(field) {
+                case "id":
+                case "author":
+                case "createdAt":
+                    return false;
+                case "description":
+                    if (!post.description || typeof post.description !== "string" || post.description.length >= 200) {
+                        return false;
+                    }
+                    break;
+                case "hashTags":
+                    if (post.hashTags) {
+                        if (!Array.isArray(post.hashTags)) {
+                            return false;
+                        }
+
+                        for (let tag in post.hashTags) {
+                            if (typeof tag !== "string") {
+                                return false;
+                            }
+                        }
+                    }
+                    break;
+                case "likes":
+                    if (post.likes) {
+                        if (!Array.isArray(post.likes)) {
+                            return false;
+                        }
+
+                        for (let like in post.likes) {
+                            if (typeof like !== "string") {
+                                return false;
+                            }
+                        }
+                    }
+                    break;
+                case "photoLink":
+                    if (post.photoLink && typeof post.photoLink !== "string") {
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
     function addPost(post) {
         if (validatePost(post)) {
             posts.push(post);
@@ -114,19 +214,6 @@
         }
 
         return false;
-    }
-
-    function checkEditPost(post) {
-        for(let attribute in post) {
-            if (attribute === "id" || attribute === "createdAt" || attribute === "author" || attribute === "likes") {
-                return false;
-            }
-            else if (!validatePostProperty(post, attribute)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     function editPost(id, post) {
@@ -154,8 +241,6 @@
 
         return false;
     }
-
-    let postsGot = getPosts(1, 6, {"hashTags": ["GOGOSECRET"]})
 
     console.log("----------------------------------------------------");
     console.log("top 6 posts (1 skipped) with hashTags containing GOGOSECRET");
