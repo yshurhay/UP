@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    z-index: 1;
+    position: sticky;
+    background-color: black;
+    text-align: center;
+    padding: 0.5%;
+    margin-bottom: 0.5%;
+    font-size: 25px;
+    top: 0%;
+}
+
+h1.site-name {
+	display: inline;
+    color: white;
+    margin: 0 80% 0 2.5%;
+    cursor: default;
+
+}
+
+button.log-out {
+	margin: 0.5% 2.5% 1% 92%;
+    font-size: 18px;
+    width: 80px;
+    cursor: pointer;
+}
+
+h3.username1 {
+    position: relative;
+    color: white;
+    right: -44.5%;
+    top: -120px;
+    margin-bottom: -5%;
+    cursor: pointer;
+}
+
+img.emblem {
+    position: relative;
+    height: 60px;
+    width: 60px;
+    left: -95%;
+    top: 12px;
+}
+
+h2.username2 {
+    position: relative;
+    color: black;
+    left: 8.7%;
+	top: -60px;
+}
+
+img.avatar{
+	position: relative;
+	width: 250px;
+	left: 2%;
+	margin-top: 10px;
+	border: 2px solid;
+	padding: 10px 10px 40px 10px;
+}
+
+button.add-post{
+	position: relative;
+	width: 274px;
+	height: 40px;
+	left: 2%;
+	top: -60px;
+	cursor: pointer;
+}
+
+
+footer {
+    background-color: black;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.news{
+    width: 40%;
+    margin: -24% 10% 25% 23%;
+    top: -1000px;
+    border-color: black;
+    border-style: ridge;
+    border-width: 6px;
+    padding: 10px 100px 0 10px;
+}
+
+h2.username3{
+	position: relative;
+	left: 80px;
+	top: -80px;
+	border: double;
+}
+
+h2.date{
+	position: relative;
+	right: -79%;
+	top: -130px;
+}
+
+h2.text-of-post{
+	position: relative;
+	word-wrap:break-word;
+	top: -120px;
+	left: 80px;
+}
+
+img.photos-of-post{
+	position: relative;
+	width: 280px;
+	height: 160px;
+	top: -120px;
+	left: 80px;
+}
+
+
+
+img.like{
+	position: relative;
+	width: 50px;
+	height: 50px;
+	top: -40px;
+	left: -280px;
+}
+
+span.likes-count {
+	position: relative;
+    font-style: italic;
+    top: -60px;
+    left: -280px;
+}
+
+
+img.user-photo {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid;
+
+}
+
+.content{
+	position: relative;
+	top: -1375px;
+	left: 1200px;
+}
+
+.more-posts{
+	display: block;
+	margin: auto;
+
+
+    font-size: 20px;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+
+}
+
+.creator-info{
+	color: white;
+}
+
+
+
